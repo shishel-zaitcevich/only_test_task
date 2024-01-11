@@ -1,0 +1,60 @@
+// {
+//   "compilerOptions": {
+//     "target": "es5",
+//     "lib": [
+//       "dom",
+//       "dom.iterable",
+//       "esnext"
+//     ],
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "module": "esnext",
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     // "noEmit": true,
+//     "jsx": "react"
+//   },
+//   "include": [
+//     "src"
+//   ]
+// }
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react"
+    // ... другие опции ...
+  },
+  "esModuleInterop": true,
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src",
+    "declarations.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+// {
+//   "compilerOptions": {
+//     "target": "es5",
+//     "module": "CommonJS",
+//     "declaration": true,
+//     "outDir": "./lib",
+//     "strict": true,
+//     "esModuleInterop": true
+//   },
+//   "include": [
+//     "src"
+//   ],
+//   "exclude": [
+//     "node_modules",
+//     "**/__tests__/*"
+//   ]
+// }
