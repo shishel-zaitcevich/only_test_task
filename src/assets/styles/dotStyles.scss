@@ -1,0 +1,44 @@
+@import './mixins.scss';
+
+$dot-container-radius: 50%;
+$dot-size: 6px;
+$container-radius: 265px;
+
+.circle_container {
+  position: relative;
+  width: 530px;
+  height: 530px;
+  border-radius: $dot-container-radius;
+  margin-top: 215px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(#42567a, 0.2);
+
+  .dot {
+    margin-top: 263px;
+    margin-left: 264px;
+    position: absolute;
+    width: $dot-size;
+    height: $dot-size;
+    background-color: var(--Black-blue, #42567a);
+    border-radius: 50%;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .number {
+      @include font;
+      position: absolute;
+    }
+
+    .title {
+      @include font;
+      font-weight: 700;
+      position: absolute;
+      margin-left: 120px;
+    }
+  }
+}

@@ -43,6 +43,9 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "react-router-dom": "^6.21.1"
+    "gsap": "^3.12.4",
+    "react-router-dom": "^6.21.1",
+    "scrolltrigger": "^1.0.1",
+    "swiper": "^11.0.5"
   }
 }

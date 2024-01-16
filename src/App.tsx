@@ -1,11 +1,14 @@
 import * as React from 'react'
 import './app.scss'
+import { EventsBlock } from './components/EventsBlock'
+import { useRef } from 'react'
+import { eventsData } from './assets/eventsData'
+import { eventsProp } from './components/Types'
 
 const App: React.FC = () => {
   return (
     <div>
-      <div className="bgc">Hello, React!</div>
-      <p>cexms;dtjkbnkrb;;sjngjn</p>
+      <EventsBlock data={eventsData} />
     </div>
   )
 }

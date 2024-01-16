@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1920px;
+  min-height: 1080px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  background: #f4f5f9;
+}
