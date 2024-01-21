@@ -1,4 +1,4 @@
-import { eventsProp } from '../components/Types'
+import { eventsProp } from '../Types'
 
 export function calculateMinAngleBetweenElements(
   element1: number,

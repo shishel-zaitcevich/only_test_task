@@ -1,5 +1,4 @@
 export interface eventsProp {
-  [x: string]: any
   id: string
   number: number
   title: string
@@ -44,4 +43,15 @@ export interface ActiveDotUtilsResult {
 export interface Point {
   x: number
   y: number
+}
+
+export interface SlideData {
+  year: number
+  description: string
+}
+
+export interface SliderProps {
+  sliderData: SlideData[]
+  isMobileScreen: boolean
+  activePage: number
 }

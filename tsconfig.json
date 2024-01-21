@@ -5,7 +5,14 @@
     "jsx": "react",
     "types": [
       "gsap"
-    ]
+    ],
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "*": [
+        "types/*"
+      ]
+    }
   },
   "esModuleInterop": true,
   "include": [

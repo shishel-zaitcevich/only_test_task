@@ -1,5 +1,5 @@
-import { eventsData } from '../assets/eventsData'
-import { eventsProp } from '../components/Types'
+import { eventsData } from '../../assets/eventsData'
+import { eventsProp } from '../Types'
 
 export function DotsPositionCalculate(data: eventsProp[]) {
   const numDots = data.length

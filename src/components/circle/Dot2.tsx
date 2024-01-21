@@ -1,29 +1,23 @@
 import * as React from 'react'
-import {
-  forwardRef,
-  ForwardedRef,
-  useRef,
-  useEffect,
-  useState,
-  MutableRefObject,
-  useCallback,
-} from 'react'
+import { forwardRef, useRef, useEffect, useState } from 'react'
 
-import { DotsPositionCalculate } from '../../utils/dotsPositionCalculate'
-
+import { DotsPositionCalculate } from '../utils/dotsPositionCalculate'
 import { eventsProp } from '../Types'
+import { rotateDotsAroundCenter } from '../utils/rotateDotsAroundCenter'
+import { dotOnClickClose } from '../utils/dotOnClickClose'
+import { animateDotEnter, animateDotLeave } from '../utils/dotAnimation'
 import '../../assets/styles/dotStyles.scss'
-import { rotateDotsAroundCenter } from '../../utils/rotateDotsAroundCenter'
-import { dotOnClickClose } from '../../utils/dotOnClickClose'
-import { animateDotEnter, animateDotLeave } from '../../utils/dotMouseAnimation'
 
 interface DotProps {
   data: eventsProp[]
   forwardedRef: React.Ref<HTMLDivElement>
+  onPageClick: (index: number) => void
+  activePage: number
+  // onPaginationClick: () => void
 }
 
 export const Dot: React.FC<DotProps> = forwardRef<HTMLDivElement, DotProps>(
-  ({ data, forwardedRef }: DotProps, ref) => {
+  ({ data, forwardedRef, onPageClick, activePage }: DotProps, ref) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null)
     const [dots, setDots] = useState<{ x: number; y: number }[]>([])
     const [hoverIndex, setHoverIndex] = useState<number | null>(null)
@@ -41,76 +35,32 @@ export const Dot: React.FC<DotProps> = forwardRef<HTMLDivElement, DotProps>(
       setDots(DotsPositionCalculate(data))
     }, [data])
 
-    // dotRefs.current = Array(data.length)
-    //   .fill(null)
-    //   .map(() => useRef<HTMLDivElement | null>(null))
-
     const { handleDotClick, handleCloseDot } = dotOnClickClose({
       activeIndex: openIndex,
       setActiveIndex: setOpenIndex,
     })
 
-    // const handleActiveDotClick = (index: number) => {
-    //   setOpenIndex(index)
-    // }
-
-    // const onAnimationComplete = useCallback(() => {
-    //   // Обнулить активную точку или выполнить другие действия после завершения анимации
-    //   if (dotRefs.current[openIndex] && dotRefs.current[openIndex].current) {
-    //     dotRefs.current[openIndex].current = null
-    //   }
-    //   // Сбрасываем openIndex после завершения анимации
-    //   setOpenIndex(null)
-    //   console.log('setOpenIndex ', openIndex) // openIndex
-    // }, [openIndex])
-
-    // const rotateDots = useCallback(() => {
-    //   // Используем useCallback для предотвращения пересоздания функции rotateDots
-    //   if (circleContainerRef.current !== null && openIndex !== null) {
-    //     rotateDotsAroundCenter(
-    //       data,
-    //       // dotRefs.current.map((ref) => ref.current),
-    //       circleContainerRef.current,
-    //       openIndex,
-    //       onAnimationComplete,
-    //     )
-    //     console.log('openIndex ', openIndex) // openIndex
-    //   }
-    // }, [openIndex, data, onAnimationComplete])
-
-    // useEffect(() => {
-    //   rotateDots()
-    // }, [rotateDots])
-    // console.log('openIndex вамфвм ', openIndex) // openIndex
-
-    const onAnimationComplete = (index: number) => {
-      if (dotRefs.current[index]) {
-        dotRefs.current[index].current = null
-        console.log(
-          ' dotRefs.current[openIndex || 0].current',
-          (dotRefs.current[index].current = null),
-        )
-      }
-    }
-
     const handleActiveDotClick = (openIndex: number) => {
       setOpenIndex(openIndex)
+      // console.log('circleContainer', circleContainerRef)
+      // console.log('circleContainerRef.current', circleContainerRef.current)
       if (circleContainerRef.current) {
         rotateDotsAroundCenter(
           data,
-          // dotRefs.current.map((ref) => ref.current),
           circleContainerRef.current,
           openIndex,
-          onAnimationComplete,
+          // handleDotClick,
+          () => onPageClick(openIndex),
         )
-        console.log('openIndex ', openIndex)
+
+        // console.log('openIndex ', openIndex)
       } else {
-        console.error('Circle container not found or not mounted bdfgndnn')
+        console.error('Circle container not found or not mounted')
       }
     }
 
     const handleMouseEnter = (index: number) => () => {
-      animateDotEnter(index, openIndex)
+      animateDotEnter(index)
       setHoverIndex(index)
     }
 
@@ -120,6 +70,18 @@ export const Dot: React.FC<DotProps> = forwardRef<HTMLDivElement, DotProps>(
         setHoverIndex(null)
       }
     }
+
+    // useEffect(() => {
+    //   // Проверяем изменение activePage и вызываем rotateDotsAroundCenter при несовпадении
+    //   if (openIndex !== null && openIndex !== activePage) {
+    //     rotateDotsAroundCenter(
+    //       data,
+    //       circleContainerRef.current,
+    //       openIndex,
+    //       () => onPageClick(openIndex),
+    //     )
+    //   }
+    // }, [activePage, openIndex, data, onPageClick])
 
     return (
       <div
@@ -136,12 +98,12 @@ export const Dot: React.FC<DotProps> = forwardRef<HTMLDivElement, DotProps>(
             onMouseEnter={handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave(index)}
             onClick={() => {
-              if (openIndex === index) {
-                handleCloseDot()
-              } else {
-                handleDotClick(index)
-                handleActiveDotClick(index)
-              }
+              // if (openIndex === index) {
+              //   handleCloseDot()
+              // } else {
+              handleDotClick(index)
+              handleActiveDotClick(index)
+              // }
             }}
           >
             <div
