@@ -9,28 +9,30 @@ interface PaginationProps {
   activePage: number
   onPageClick: (index: number) => void
   data: eventsProp[]
+  // forwardedRef: React.RefObject<HTMLDivElement>
 }
 
 const PaginationComponent: React.FC<PaginationProps> = ({
   totalSlides,
   activePage,
   onPageClick,
-
   data,
+  // forwardedRef,
 }) => {
   const paginationRef = useRef<HTMLDivElement>(null)
 
   const formatNumber = (number: number) => number.toString().padStart(2, '0')
 
-  // const handlePaginationClick = (index: number) => {
-  //   onPageClick(index) // вызываем onPageClick, чтобы обновить activePage
-  //   rotateDotsAroundCenter(data, paginationRef.current, index, () => {})
-  // }
-
   return (
     <div className="pagination-container">
       <div className="pagination_page" ref={paginationRef}>
-        <div className="page" onClick={() => onPageClick(activePage)}>
+        <div
+          className="page"
+          onClick={() => {
+            onPageClick(activePage)
+            console.log('paginationRef', paginationRef)
+          }}
+        >
           {`${formatNumber(activePage + 1)}/${formatNumber(totalSlides)}`}
         </div>
       </div>

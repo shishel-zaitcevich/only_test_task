@@ -1,0 +1,38 @@
+.interval_container {
+  position: relative;
+  top: 120px;
+  width: 973px;
+  height: 530px;
+  margin: 0 auto;
+
+  .intervals {
+    position: relative;
+    bottom: 70%;
+    width: 973px;
+    height: 160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    margin: 0 auto;
+  }
+
+  .interval_start,
+  .interval_last {
+    text-align: center;
+    font-family: 'PT Sans';
+    font-size: 200px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 160px; /* 80% */
+    letter-spacing: -4px;
+  }
+
+  .interval_start {
+    color: var(--Iris-100, #5d5fef);
+  }
+
+  .interval_last {
+    color: var(--Fuschia-100, #ef5da8);
+  }
+}

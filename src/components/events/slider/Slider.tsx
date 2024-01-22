@@ -9,13 +9,24 @@ import 'swiper/scss/pagination'
 import '../../../assets/styles/swiperStyles.scss'
 import { SliderProps } from '../../Types'
 import { SlideData } from '../../Types'
+import { animateDotEnter } from '../../utils/dotAnimation'
 
 SwiperCore.use([Pagination, Navigation])
 
-const Slider: React.FC<SliderProps> = ({ sliderData, isMobileScreen }) => {
+const Slider: React.FC<SliderProps> = ({
+  sliderData,
+  isMobileScreen,
+  activePage,
+}) => {
   const paginationRef = useRef<any>(null)
   const [isPrevButtonActive, setPrevButtonActive] = useState(false)
   const [isNextButtonActive, setNextButtonActive] = useState(true)
+
+  useEffect(() => {
+    // Вызываем animateDotEnter при каждом изменении activePage
+    animateDotEnter(activePage)
+    console.log('activePageыдшвук', activePage)
+  }, [activePage])
 
   const handleSlideChange = (swiper: any) => {
     setPrevButtonActive(!swiper.isBeginning)

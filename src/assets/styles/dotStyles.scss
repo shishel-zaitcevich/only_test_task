@@ -9,12 +9,12 @@ $container-radius: 265px;
   width: 530px;
   height: 530px;
   border-radius: $dot-container-radius;
-  margin-top: 215px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   border: 1px solid rgb(#42567a, 0.2);
   margin: 0 auto;
+  z-index: 3;
 
   .dot {
     margin-top: 263px;
@@ -29,19 +29,19 @@ $container-radius: 265px;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
 
-    .number {
-      @include font;
-      position: absolute;
-      // transform: rotate(0deg); /* Фиксируем положение вертикально */
-      // transform-origin: center;
-    }
+  .number {
+    @include font;
+    position: absolute;
+    // transform: rotate(0deg); /* Фиксируем положение вертикально */
+    // transform-origin: center;
+  }
 
-    .title {
-      @include font;
-      font-weight: 700;
-      position: absolute;
-      margin-left: 120px;
-    }
+  .label {
+    @include font;
+    font-weight: 700;
+    position: absolute;
+    margin-left: 120px;
   }
 }
