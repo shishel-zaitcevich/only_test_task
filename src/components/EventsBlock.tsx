@@ -15,6 +15,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 import '../assets/styles/swiperStyles.scss'
 import '../assets/styles/style.scss'
 import { Interval } from './intervals/Interval'
+import { getDotStyles } from './utils/getDotStyles'
 
 SwiperCore.use([Pagination, Navigation])
 
@@ -25,8 +26,12 @@ interface EventsBlokProps {
 export function EventsBlock({ data }: EventsBlokProps, ref) {
   const eventsBlockRef = useRef<HTMLDivElement>(null)
   const circleContainerRef = useRef<HTMLDivElement>(null)
+  const dotRefs = useRef<Array<React.MutableRefObject<HTMLDivElement | null>>>(
+    Array(data.length)
+      .fill(null)
+      .map(() => useRef<HTMLDivElement | null>(null)),
+  )
   const [activePage, setActivePage] = useState(0)
-  // const [angleToLastDot, setAngleToLastDot] = useState<number | null>(null) // Добавлено новое состояние
   console.log('eventsBlockRef', eventsBlockRef)
 
   const setCircleContainerRef = (ref: React.RefObject<HTMLDivElement>) => {
@@ -58,10 +63,9 @@ export function EventsBlock({ data }: EventsBlokProps, ref) {
         () => {
           onPageClick(prevPage - 1)
         },
-        // setAngleToLastDot,
+        dotRefs.current,
       )
-      animateDotEnter(prevPage - 1)
-      if (activePage !== prevPage - 1) {
+      if (activePage == prevPage) {
         animateDotLeave(activePage)
         console.log('currentElement', activePage)
       }
@@ -74,14 +78,11 @@ export function EventsBlock({ data }: EventsBlokProps, ref) {
       const currentNumberElement = document.querySelector(
         `#dot-${prevPage + 1} .number`,
       ) as HTMLDivElement
-      // const currentTitleElement = document.querySelector(
-      //   `#dot-${prevPage + 1} .title`,
-      // ) as HTMLDivElement
+      //
       // animateDotShowTitle(prevPage + 1)
-      // console.log('currentTitleElement', currentTitleElement)
-      if (currentNumberElement) {
-        currentNumberElement.style.visibility = 'visible'
-      }
+      // if (currentNumberElement) {
+      //   currentNumberElement.style.visibility = 'visible'
+      // }
 
       rotateDotsAroundCenter(
         data,
@@ -90,7 +91,7 @@ export function EventsBlock({ data }: EventsBlokProps, ref) {
         () => {
           onPageClick(prevPage + 1)
         },
-        // setAngleToLastDot,
+        dotRefs.current,
       )
 
       if (activePage !== prevPage + 1) {
@@ -113,6 +114,7 @@ export function EventsBlock({ data }: EventsBlokProps, ref) {
           setCircleContainerRef={setCircleContainerRef}
           onPageClick={handlePageChange}
           forwardedRef={eventsBlockRef}
+          dotRefs={dotRefs.current}
         />
         <div className="swiper__wrapper">
           <div className="pagination">
@@ -157,7 +159,4 @@ export function EventsBlock({ data }: EventsBlokProps, ref) {
       </div>
     </div>
   )
-}
-function animateDotShowTitle(arg0: number) {
-  throw new Error('Function not implemented.')
 }

@@ -30,22 +30,22 @@ export function calculateMinAngle(
     data,
   )
 
-  // Рассчитываем угол по часовой стрелке
+  // угол по часовой стрелке
   const clockwiseAngle = angleBetweenElements
 
-  // Рассчитываем угол против часовой стрелки и делаем его отрицательным
+  // угол против часовой стрелки
   let counterclockwiseAngle = 360 - angleBetweenElements
 
-  // Если угол против часовой стрелки больше 180 градусов, используем отрицательное значение
+  // Если угол против часовой стрелки больше 180 градусов, берем с минусом
   if (counterclockwiseAngle > 180) {
     counterclockwiseAngle = 360 - counterclockwiseAngle
   }
 
-  // Проверяем равенство углов и возвращаем угол по часовой стрелке
+  // угол по часовой стрелке
   if (clockwiseAngle === counterclockwiseAngle) {
     return clockwiseAngle
   }
 
-  // Возвращаем наименьший угол с учетом знака
+  // наименьший угол
   return Math.min(clockwiseAngle, -counterclockwiseAngle)
 }

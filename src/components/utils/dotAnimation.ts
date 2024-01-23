@@ -1,9 +1,4 @@
 import gsap from 'gsap'
-import { CustomPath } from '../Types'
-
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
-
-// gsap.registerPlugin(MotionPathPlugin)
 
 export function animateDotEnter(index: number) {
   const dotSelector = `#dot-${index}`
@@ -20,20 +15,11 @@ export function animateDotEnter(index: number) {
     ease: 'power2.inOut',
   })
 
-  gsap.to(`${numberSelector}`, {
+  gsap.to(numberSelector, {
     opacity: 1,
     duration: 0.3,
     ease: 'power2.inOut',
-    // rotate: '360',
   })
-
-  // gsap.to(`${labelSelector}`, {
-  //   opacity: 1,
-  //   x: 20,
-  //   duration: 0.5, // увеличили продолжительность
-  //   // ease: 'power2.inOut',
-  //   delay: 1,
-  // })
 }
 
 export function animateDotShowTitle(index: number) {
@@ -42,21 +28,15 @@ export function animateDotShowTitle(index: number) {
   gsap.to(`${labelSelector}`, {
     opacity: 1,
     x: 20,
-    duration: 0.5, // увеличили продолжительность
+    duration: 0.5,
     ease: 'power2.inOut',
-    delay: 1,
+    delay: 3,
   })
 }
 
 export function animateDotLeave(index: number) {
   const dotSelector = `#dot-${index}`
   const numberAndTitleSelector = `${dotSelector} .number, ${dotSelector} .title`
-
-  const motionPathConfig = {
-    path: { x: 0, y: 0 },
-    align: 'self',
-    autoRotate: true,
-  }
 
   const initialStyles = {
     width: 6,
@@ -69,7 +49,6 @@ export function animateDotLeave(index: number) {
     duration: 0.3,
     ...initialStyles,
     ease: 'power2.inOut',
-    motionPath: motionPathConfig as any,
     onComplete: () => {
       gsap.to(numberAndTitleSelector, {
         opacity: 0,

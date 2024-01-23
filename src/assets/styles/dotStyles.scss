@@ -19,7 +19,7 @@ $container-radius: 265px;
   .dot {
     margin-top: 263px;
     margin-left: 264px;
-    position: absolute;
+    position: relative;
     width: $dot-size;
     height: $dot-size;
     background-color: var(--Black-blue, #42567a);
@@ -34,14 +34,12 @@ $container-radius: 265px;
   .number {
     @include font;
     position: absolute;
-    // transform: rotate(0deg); /* Фиксируем положение вертикально */
-    // transform-origin: center;
   }
 
   .label {
     @include font;
     font-weight: 700;
-    position: absolute;
-    margin-left: 120px;
+    // position: absolute;
+    padding-left: 180px;
   }
 }

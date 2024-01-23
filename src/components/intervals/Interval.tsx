@@ -9,66 +9,19 @@ interface IntervalProp {
   data: eventsProp[]
   forwardedRef: React.Ref<HTMLDivElement>
   onPageClick: (index: number) => void
+  dotRefs: Array<React.MutableRefObject<HTMLDivElement | null>>
+
   setCircleContainerRef: (ref: React.RefObject<HTMLDivElement>) => void
 }
 
 export const Interval: React.FC<IntervalProp> = ({
   data,
   setCircleContainerRef,
-  // onPageClick,
+  onPageClick,
+  dotRefs,
 }) => {
   const [activePage, setActivePage] = useState(0)
   const intervalsRef = useRef([])
-
-  // useEffect(() => {
-  //   intervalsRef.current = intervalsRef.current.slice(0, data.length)
-  // }, [data.length])
-
-  // const animateIntervals = (index) => {
-  //   const intervalElement = intervalsRef.current[index]
-  //   if (!intervalElement) return
-
-  //   gsap.fromTo(
-  //     intervalElement,
-  //     { opacity: 0, x: -20 },
-  //     { opacity: 1, x: 0, duration: 0.5 },
-  //   )
-  // }
-
-  // const animateDetailsRecursive = (index, detailIndex = 0) => {
-  //   const detailsElement = intervalsRef.current[index]
-  //   if (!detailsElement) return
-
-  //   gsap.fromTo(
-  //     detailsElement.children[detailIndex],
-  //     { opacity: 0, y: -20 },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       duration: 0.5,
-  //       onComplete: () => {
-  //         if (detailIndex < data[index].details.length - 1) {
-  //           animateDetailsRecursive(index, detailIndex + 1)
-  //         }
-  //       },
-  //     },
-  //   )
-  // }
-
-  // useEffect(() => {
-  //   data.forEach((event, index) => {
-  //     const intervalElement = intervalsRef.current[index]
-  //     if (!intervalElement) return
-
-  //     if (index === activePage) {
-  //       intervalElement.classList.add('active')
-  //       animateDetailsRecursive(index)
-  //     } else {
-  //       intervalElement.classList.remove('active')
-  //       animateIntervals(index)
-  //     }
-  //   })
-  // }, [data, activePage])
 
   const handlePageChange = (index: number) => {
     setActivePage(index)
@@ -81,6 +34,7 @@ export const Interval: React.FC<IntervalProp> = ({
         setCircleContainerRef={setCircleContainerRef}
         onPageClick={handlePageChange}
         forwardedRef={undefined}
+        dotRefs={dotRefs}
       />
       {data.map((event, index) => (
         <div
